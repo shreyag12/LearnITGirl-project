@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  {% block title %}<title>Pocket</title>{% endblock %}
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  
+  <!-- Add additional CSS in static file -->
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+
+<body>
+
+  <div class="container-fluid">
+      <div class = "panel-group">
+      <div class = "panel panel-primary">
+      <div class = "panel-heading">Welcome to Pocket</div>
+      </div>
+      </div>
+      <div class = "jumbotron">
+      <div class = "row">
+      <div class = "col-md-4">
+        <img src = "20150225_134637.jpg" alt="sorry">
+      </div>
+      <div class = "col-md-8">
+      <div class = "modal-content">
+
+        {% block content %}{% endblock %}
+        
+      <div class = "modal-footer"></div>
+      </div>
+      </div>
+      </div>
+      </div>
+</body>
+</html>
