@@ -86,42 +86,66 @@ $(function () {
       <!-- <div class = "col-md-4"> -->
       <div id = "container" class = "cols">
       <ul>
-      {% for b in blist %}
-      <li class="article">
-      <a href = "{{ b.bookmark }}">{{ b.bookmark }}</a>
+          {% for b in blist %}
+            <li class="article">
+              <a href = "{{ b.bookmark }}"><text>{{ b.bookmark }}</text></a>
       <!-- <ul>
       <li> -->
-      <div><a href = "#myModal" data-toggle="modal" id = "{{ b.bookmark }}" data-target = "#edit-modal"><span class = "glyphicon glyphicon-tag"></span></a></div>
+      <!-- <a href = "#" <span class="glyphicon glyphicon-trash"></span></a> -->
+                <div>
+                    <table class = "glyphicons">
+                       
+                       <tr>
+                       <td>
+
+                          <a href = "#myModal" data-toggle="modal" id = "{{ b.bookmark }}" data-target = "#edit-modal">
+                            <span class = "glyphicon glyphicon-tag"></span>
+                          </a>
+                        </td>
+                        <td>
+                        
+                          <a href="#">
+                            <span class="glyphicon glyphicon-trash"></span>
+                          </a>
+                          </td>
+                        </tr>
+                    </table>
+                  </div>
       <!-- <div><a href = "#myModal" data-toggle="modal" id = "1" data-target ="#edit-modal">hello</a></div> -->
-       <div id="edit-modal" class="modal fade"  role="dialog" aria-hidden="true">
-    <div class="modal-dialog">
+                <div id="edit-modal" class="modal fade"  role="dialog" aria-hidden="true">
+                  <div class="modal-dialog">
     
       <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Add tags</h4>
-        </div>
-        <div class="modal-body">
-       <form name = "form2" id = "form2" method = "post" action = "{% url 'savetag' %}" class = "form-inline">
-        {% csrf_token %}
-        <div class = "form-group">
-        <input name = "tag"  id = "tag" required>
-        <input type="hidden" id = "field1" name="bookmark" value="">
-        <button type = "submit" class = "btn btn-danger">Save</button>
-        </div>
-        </form>
-        </div>
-        <div class="modal-footer">
-        </div>
-        </div>
-        </div>
-        </div>
-        </li>
-      </ul>
+                      <div class="modal-content">
+
+                          <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Add tags</h4>
+                          </div>
+
+                          <div class="modal-body">
+                              <form name = "form2" id = "form2" method = "post" action = "{% url 'savetag' %}" class = "form-inline">
+                                  {% csrf_token %}
+                                  <div class = "form-group">
+                                    <input name = "tag"  id = "tag" required>
+                                        <input type="hidden" id = "field1" name="bookmark" value="">
+                                        <button type = "submit" class = "btn btn-danger">Save</button>
+                                  </div>
+                             </form>
+                          </div>
+
+                          <div class="modal-footer">
+                          </div>
+
+                      </div>
+
+                    </div>
+                </div>
 
 
-      </li>
+              </li>
+
+
       
       {% endfor %}
 

@@ -21,14 +21,24 @@
       <div class = "panel panel-primary">
       <div class = "panel-heading">Welcome to Bookmark++
       <div style = "float:right;">
-        <button type = "submit" class = "btn btn-primary" style="margin-top:-6.5px">Logout</button>
+      <a href = "{% url 'index' %}"<button type = "submit" class = "btn btn-primary" style="margin-top:-6.5px">Logout</button></a>
       </div>
       </div>
       </div>
       </div>
       <div class = "jumbotron">
       <div class = "row">
-      <div id = "container" class = "cols">
+      <div class = "cols2">
+      <ul>
+       {% for b in bookmarks %}
+      <li class="article">
+      <div class="bookmark-panel">
+      <p>{{ b.user }} shared this</p>
+      <a href = "{{ b.bookmark }}">{{ b.bookmark }}</a>
+      </div>
+      </li>
+      {% endfor %}
+      </ul>
       </div>
       </div>
       </div>

@@ -71,6 +71,34 @@ model-header{
 .cols {
     column-count: 2;
 }
+.cols2 {
+    column-count: 1;
+    width: 50%;
+    margin: 2em auto;
+}
+.bookmark-panel {
+    text-align: center;
+}
+.glyphicons {
+    color: black;
+    padding-top: 7%;
+    padding-left: 85%;
+     /*float:right;*/
+     bottom: .55em;
+     display: block;
+     left: auto;
+    right: .65em;
+    list-style: none;
+   /* margin-left:85%;
+    margin-top:7%;*/
+
+   /* margin: 0;
+    padding: 0;
+    position: absolute;
+    bottom: .5em;
+    left: 10px;
+    z-index: 10;*/
+}
 /*.buttons {
     bottom: .55em;
     display: block;
@@ -116,8 +144,8 @@ model-header{
 
 .glyphicon-tag {
     color: black;
-     padding-top: 8%;
-     padding-left: 90%;
+     /*padding-top: 8%;*/
+    /* padding-left: 90%;*/
 }
 .modal-title {
     text-align: center;
@@ -127,4 +155,9 @@ model-header{
 }
 .index {
     text-align: center;
+}
+.glyphicon-trash {
+    color: black;
+     /*padding-top: 8%;*/
+     /*padding-left: 90%;*/
 }

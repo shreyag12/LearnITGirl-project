@@ -78,20 +78,26 @@ def get_bookmark(user):
     return blist
 
 def home(request):
-    category=Category.objects.filter(user=request.user.pk)
+    category=Category.objects.values_list('category',flat = True).filter(user=request.user.pk)
+    category = list(category)
+    print category
+
     # bookmarks= UserBookmark.objects.values('bookmark').filter(tag__in = category).exclude(user=request.user.pk)
     # bookmarks = UserBookmark.objects.values('bookmark').filter(tag__in = ['java','android','python'])
-    bookmarks = UserBookmark.objects.filter(tag__in = ['Java','Android','Python','Data Science','Data Analytics'])
+    bookmarks = UserBookmark.objects.filter(tag__name__in = category)
     print bookmarks
-    return render(request,'home.html')
+    return render(request,'home.html',{'bookmarks':bookmarks})
 
 def save_tag(request):
-    tagslist = request.POST.getlist("tag")
+    # tagslist = request.POST.getlist("tag")
+    tagslist = request.POST.get("tag")
+    tagslist = tagslist.split(',')
     bookmark = request.POST.get("bookmark")
-    print bookmark
+    print tagslist
     obj=UserBookmark.objects.get(bookmark = bookmark)
     user = request.user.pk
-    obj.tag = tagslist
+    # obj.tag = tagslist
+    obj.tag.add(*tagslist)
     obj.save()
     blist = get_bookmark(user)
     return render(request,'myprofile.html',{'blist' : blist})
