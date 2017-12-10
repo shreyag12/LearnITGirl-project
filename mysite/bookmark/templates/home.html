@@ -34,7 +34,13 @@
       <li class="article">
       <div class="bookmark-panel">
       <p>{{ b.user }} shared this</p>
+      {% for tag in b.tags.all %}
+      <p>{{ tag.name }}</p>
+      {% endfor %}
       <a href = "{{ b.bookmark }}">{{ b.bookmark }}</a>
+      <a href="{% url 'add' b.bookmark %}" data-toggle="tooltip" title = "Add to your list" data-placement="top">
+          <span class="glyphicon glyphicon-star-empty"></span>
+      </a>
       </div>
       </li>
       {% endfor %}

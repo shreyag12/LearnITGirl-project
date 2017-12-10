@@ -62,6 +62,7 @@ model-header{
     margin:5px;
     border: 1px;
     box-sizing: border-box;
+    position:relative;
 }
 #container {
     width: 100%;
@@ -89,6 +90,7 @@ model-header{
      left: auto;
     right: .65em;
     list-style: none;
+    position:absolute;
    /* margin-left:85%;
     margin-top:7%;*/
 
@@ -160,4 +162,7 @@ model-header{
     color: black;
      /*padding-top: 8%;*/
      /*padding-left: 90%;*/
+}
+.glyphicon-star-empty {
+    color: black;
 }

@@ -8,7 +8,9 @@ from django.views.decorators.csrf import csrf_protect
 from django.contrib.auth import authenticate,login
 from .forms import UserLoginForm
 from django.contrib.auth.models import User
+from django.contrib import messages
 from .models import Category,UserBookmark
+import ast
 # Create your views here.
 
 def index(request):
@@ -62,7 +64,8 @@ def get_category(request):
     print user
     obj=Category(user_id=user,category=clist)
     obj.save()
-    return HttpResponse("Registeration succesfull")
+    messages.add_message(request, messages.SUCCESS, 'Registeration succesful!')
+    return render(request,'index.html')
     # user.category=cname
     # user.save()
 def save_bookmark(request):
@@ -80,11 +83,20 @@ def get_bookmark(user):
 def home(request):
     category=Category.objects.values_list('category',flat = True).filter(user=request.user.pk)
     category = list(category)
-    print category
+    category2=ast.literal_eval(category[0])
+    print category2
+    # category = category.split(',')
+    # category2 = []
+    # for x in category:
+    #     category2.append(x)
+    # # category2 = category[1:]
+    # category2.encode("utf8")
+    # print category2
+    # print type(category)
 
     # bookmarks= UserBookmark.objects.values('bookmark').filter(tag__in = category).exclude(user=request.user.pk)
     # bookmarks = UserBookmark.objects.values('bookmark').filter(tag__in = ['java','android','python'])
-    bookmarks = UserBookmark.objects.filter(tag__name__in = category)
+    bookmarks = UserBookmark.objects.filter(tag__name__in = category2).exclude(user = request.user.pk)
     print bookmarks
     return render(request,'home.html',{'bookmarks':bookmarks})
 
@@ -102,9 +114,24 @@ def save_tag(request):
     blist = get_bookmark(user)
     return render(request,'myprofile.html',{'blist' : blist})
 
+def delete_bookmark(request,bookmark):
+    user = request.user.pk
+    # bookmark = request.POST.get("value")
+    UserBookmark.objects.filter(user = user,bookmark = bookmark).delete()
+    blist = get_bookmark(user)
+    return render(request,'myprofile.html',{'blist' : blist})
+def add_bookmark(request,bookmark): 
+    user = request.user.pk
+    obj=UserBookmark(user_id=user,bookmark = bookmark)
+    obj.save()
+    bookmarks = show(user)
+    return render(request,'home.html',{'bookmarks':bookmarks})
 
-        
-
-    
+def show(user):
+    category=Category.objects.values_list('category',flat = True).filter(user=user)
+    category = list(category)
+    category2=ast.literal_eval(category[0])
+    bookmarks = UserBookmark.objects.filter(tag__name__in = category2).exclude(user = user)
+    return bookmarks
 
 

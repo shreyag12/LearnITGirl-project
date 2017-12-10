@@ -12,4 +12,6 @@ urlpatterns = [
     url(r'^#/$',views.save_bookmark,name='savebookmark'),
     url(r'^tag/$',views.save_tag,name = 'savetag'),
     url(r'^home/$',views.home,name='home'),
+    url(r'^deletebookmark/(?P<bookmark>http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+)/$',views.delete_bookmark,name='deletebookmark'),
+    url(r'^add/(?P<bookmark>http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+)/$',views.add_bookmark,name='add'),
 ]
