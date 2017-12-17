@@ -20,6 +20,7 @@
       <div class = "panel-group">
       <div class = "panel panel-primary">
       <div class = "panel-heading">Welcome to Bookmark++
+      <a class = "icon" href ="{% url 'profile' %}">My bookmarks</a>
       <div style = "float:right;">
       <a href = "{% url 'index' %}"<button type = "submit" class = "btn btn-primary" style="margin-top:-6.5px">Logout</button></a>
       </div>
@@ -28,15 +29,31 @@
       </div>
       <div class = "jumbotron">
       <div class = "row">
+      <div class = "col-md-3">
+      <div class = "side-nav">
+      <table>
+      <tr>
+      <td><h4>My interests</h4></td>
+      <td><a href = "#">Edit</a></td>
+      </tr>
+      </table>
+      <hr style="border-top-width: 2px;border-top-color: #337ab7;">
+      <ul class = "sidebar">
+      {% for i in interests %}
+      <li>{{ i }}</li>
+      {% endfor %}
+      </ul>
+      </div>
+      </div>
+      <div class = "col-md-6" style = "margin-left:48px;">
       <div class = "cols2">
       <ul>
        {% for b in bookmarks %}
-      <li class="article">
+      <li class="article" style = "margin-left: -217px;">
       <div class="bookmark-panel">
-      <p>{{ b.user }} shared this</p>
-      {% for tag in b.tags.all %}
-      <p>{{ tag.name }}</p>
-      {% endfor %}
+      {% load app_filters %}
+      <p class = "intro">{{ mydict|get_item:b.bookmark }}</p>
+      <p class = "main">{{ b.user }} shared this</p>
       <a href = "{{ b.bookmark }}">{{ b.bookmark }}</a>
       <a href="{% url 'add' b.bookmark %}" data-toggle="tooltip" title = "Add to your list" data-placement="top">
           <span class="glyphicon glyphicon-star-empty"></span>
@@ -46,6 +63,8 @@
       {% endfor %}
       </ul>
       </div>
+      </div>
+      <div class = "col-md-3"></div>
       </div>
       </div>
       </div>

@@ -10,6 +10,8 @@ from .forms import UserLoginForm
 from django.contrib.auth.models import User
 from django.contrib import messages
 from .models import Category,UserBookmark
+from itertools import chain
+from taggit.models import Tag
 import ast
 # Create your views here.
 
@@ -84,7 +86,7 @@ def home(request):
     category=Category.objects.values_list('category',flat = True).filter(user=request.user.pk)
     category = list(category)
     category2=ast.literal_eval(category[0])
-    print category2
+    # print category2
     # category = category.split(',')
     # category2 = []
     # for x in category:
@@ -98,7 +100,31 @@ def home(request):
     # bookmarks = UserBookmark.objects.values('bookmark').filter(tag__in = ['java','android','python'])
     bookmarks = UserBookmark.objects.filter(tag__name__in = category2).exclude(user = request.user.pk)
     print bookmarks
-    return render(request,'home.html',{'bookmarks':bookmarks})
+    interests = Category.objects.values_list('category').filter(user = request.user.pk)
+    interests = list(interests)
+    interests= ast.literal_eval(interests[0][0])
+    blist = UserBookmark.objects.values('bookmark').filter(tag__name__in = category2).exclude(user = request.user.pk)
+    mydict = {}
+    for i in blist:
+        tag_ids = UserBookmark.objects.values('tag').filter(bookmark = i['bookmark'])
+        bookmark = i['bookmark']
+        tags = Tag.objects.values_list('name',flat=True).filter(id__in = tag_ids)
+        tags = list(tags)
+        new = []
+        for t in tags:
+            n=t.encode('ascii')
+            new.append(n)
+        mydict[bookmark]=new
+        # pair = { bookmark, tags}
+        # mydict.append(pair)
+    # tag_ids = UserBookmark.objects.values('tag').filter(bookmark__in = blist)
+    # tags = Tag.objects.filter(id__in = tag_ids)
+    # print mydict
+    # for key in mydict:
+    #     print mydict[key]
+    print mydict["https://simpleisbetterthancomplex.com/tutorial/2016/07/26/how-to-reset-migrations.html"]
+    return render(request,'home.html',{'mydict': mydict,'bookmarks' :bookmarks, 'interests':interests})
+    # return render(request,'home.html',{'mydict':mydict})
 
 def save_tag(request):
     # tagslist = request.POST.getlist("tag")
@@ -133,5 +159,12 @@ def show(user):
     category2=ast.literal_eval(category[0])
     bookmarks = UserBookmark.objects.filter(tag__name__in = category2).exclude(user = user)
     return bookmarks
+def profile(request):
+    user = request.user.pk
+    blist = get_bookmark(user)
+    return render(request,'myprofile.html',{'blist': blist})
+def about(request):
+    return render(request,'about.html')
+
 
 

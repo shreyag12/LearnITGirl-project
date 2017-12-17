@@ -19,7 +19,11 @@
   <div class="container-fluid">
       <div class = "panel-group">
       <div class = "panel panel-primary">
-      <div class = "panel-heading">Welcome to Bookmark++</div>
+      <div class = "panel-heading">Welcome to Bookmark++
+      <div style = "float:right;">
+      <a class = "icon " href = "{% url 'about' %}" style="padding-right:30px;">About</a>
+      </div>
+      </div>
       </div>
       </div>
       <div class = "jumbotron">
@@ -35,6 +39,8 @@
         {% block content %}{% endblock %}
         
       <div class = "modal-footer"></div>
+      </div>
+      <div class = "footer">
       </div>
       </div>
       </div>

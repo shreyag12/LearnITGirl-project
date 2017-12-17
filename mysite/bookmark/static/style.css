@@ -63,6 +63,7 @@ model-header{
     border: 1px;
     box-sizing: border-box;
     position:relative;
+    word-wrap:break-word;
 }
 #container {
     width: 100%;
@@ -165,4 +166,34 @@ model-header{
 }
 .glyphicon-star-empty {
     color: black;
+}
+.about {
+    color : #337ab7;
+    font-style: italic;
+    font-weight: bold;
+}
+p.intro {
+    font-size : 12px;
+    float:right;
+    color:#666;
+
+}
+p.main {
+    float:left;
+}
+.footer {
+   position: fixed;
+   left: 0;
+   bottom: 0;
+   width: 100%;
+   background-color: #337ab7;
+   height:5%;
+}
+.side-nav {
+    padding-top: 29px;
+    padding-bottom:89px;
+    color:#666;
+}
+ul.sidebar {
+    padding-left: 14px;
 }
