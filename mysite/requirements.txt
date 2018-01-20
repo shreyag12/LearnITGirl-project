@@ -18,6 +18,7 @@ enum34==1.1.2
 Fabric==1.10.2
 feedgenerator==1.9
 ghp-import==0.4.1
+gunicorn==19.7.1
 gyp==0.1
 html5lib==0.999
 httplib2==0.9.1
@@ -86,4 +87,5 @@ urllib3==1.13.1
 virtualenv==13.0.1
 virtualenv-clone==0.2.5
 virtualenvwrapper==4.5.1
+whitenoise==3.3.1
 zope.interface==4.1.3

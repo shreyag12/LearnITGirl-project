@@ -26,7 +26,7 @@ SECRET_KEY = '_8y7cx1(-l!5+$j$v6+p!t7ukm_u0&0loq(m#0yzoe8gpjr5=^'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['learnitgirl-bookmark.herokuapp.com']
 
 
 # Application definition
