@@ -3,4 +3,4 @@ gunicorn==19.7.1
 Pillow==3.1.2
 Markdown==2.6.9
 whitenoise==3.3.1
-psycopg2==2.6.1
+psycopg2==2.7.1
