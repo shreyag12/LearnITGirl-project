@@ -5,13 +5,18 @@
   {% block title %}<title>Bookmark</title>{% endblock %}
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script data-require="jquery@*" data-semver="2.0.3" src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   
   <!-- Add additional CSS in static file -->
+
   {% load static %}
+  <script src="{% static "js/star-ajax.js" %}" type="text/javascript" charset="utf-8"></script>
   <link rel="stylesheet" type="text/css" href="{% static "style.css" %}" />
+ 
 </head>
 
 <body>
@@ -22,7 +27,15 @@
       <div class = "panel-heading">Welcome to Bookmark++
       <a class = "icon" href ="{% url 'profile' %}">My bookmarks</a>
       <div style = "float:right;">
-      <a href = "{% url 'index' %}"<button type = "submit" class = "btn btn-primary" style="margin-top:-6.5px">Logout</button></a>
+      <!-- <a href = "{% url 'index' %}"<button type = "submit" class = "btn btn-primary" style="margin-top:-6.5px">Logout</button></a> -->
+       <div class="dropdown" style = "margin-top:-6.5px">
+         <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">{{ firstname }}
+         <span class="caret"></span></button>
+        <ul class="dropdown-menu">
+        <li><a href="#">Help</a></li>
+        <li><a href="#">Settings</a></li>
+        <li><a href="{% url 'index' %}">Logout</a></li>
+       </ul>
       </div>
       </div>
       </div>
@@ -31,12 +44,8 @@
       <div class = "row">
       <div class = "col-md-3">
       <div class = "side-nav">
-      <table>
-      <tr>
-      <td><h4>My interests</h4></td>
-      <td><a href = "#">Edit</a></td>
-      </tr>
-      </table>
+      <div id = "p1"><h4>My interests</h4></div>
+     <!--  <div id = "p2"><a href = "#">Edit</a></div> -->
       <hr style="border-top-width: 2px;border-top-color: #337ab7;">
       <ul class = "sidebar">
       {% for i in interests %}
@@ -55,9 +64,13 @@
       <p class = "intro">{{ mydict|get_item:b.bookmark }}</p>
       <p class = "main">{{ b.user }} shared this</p>
       <a href = "{{ b.bookmark }}">{{ b.bookmark }}</a>
-      <a href="{% url 'add' b.bookmark %}" data-toggle="tooltip" title = "Add to your list" data-placement="top">
+      <a id = "star" href="{% url 'add' b.bookmark %}" data-toggle="tooltip" title = "Add to your list" data-placement="top">
           <span class="glyphicon glyphicon-star-empty"></span>
       </a>
+     <!--  <a id = "star" href = " " data-toggle="tooltip" title = "Add to your list" data-placement="top">
+          <span class="glyphicon glyphicon-star-empty" onclick = "add_bookmark(b.bookmark)"></span>
+      </a> -->
+     <!--  <a id="menu-toggle" href="#" class="btn btn-default"><i class="glyphicon glyphicon-arrow-right"></i></a> -->
       </div>
       </li>
       {% endfor %}
@@ -68,5 +81,42 @@
       </div>
       </div>
       </div>
+      <script type = "text/javascript">
+// $('#star').click(function(){
+//     // $(this).find('span').toggleClass('glyphicon glyphicon-star-empty').toggleClass('glyphicon glyphicon-star');
+//     if($('span').hasClass('glyphicon glyphicon-star-empty'))
+// {
+//     $('#star').html('<span class="glyphicon glyphicon-heart"></span>');
+//     $('#star').attr('data-original-title', 'Added').tooltip('fixTitle').tooltip('show');
+
+// }
+// });
+function add_bookmark(bookmark) {
+// $('#star').click(function(e){
+//   e.preventDefault();
+  $.ajax({
+        type: "POST",
+        url: '/add/(?P<bookmark>http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+)/',
+        data: {
+          'bookmark': bookmark
+        },
+        // dataType: 'json',
+        // success: function (data) {
+        //   if (data.is_taken) {
+        //     alert("A user with this username already exists.");
+        //   }
+        // }
+      });
+
+    });
+// $('#menu-toggle').click( function(){
+//     $(this).find('i').toggleClass('glyphicon-arrow-right').toggleClass('glyphicon-arrow-left');
+// });
+// $('#star').click(function(e) {
+//   e.preventDefault();
+
+//   $(this).find('span').toggleClass('glyphicon-arrow-right').toggleClass('glyphicon-arrow-left');
+// });
+</script>
 </body>
 </html>

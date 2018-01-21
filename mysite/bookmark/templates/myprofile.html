@@ -76,7 +76,16 @@ $(function () {
       </form>
       </div>
     </a>
-    <a href = "{% url 'index' %}" class = "btn btn-primary" style="margin-top:-6.5px">Logout</a>
+    <!-- <a href = "{% url 'index' %}" class = "btn btn-primary" style="margin-top:-6.5px">Logout</a> -->
+     <div class="dropdown" style = "margin-top:-6.5px">
+         <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" style="margin-top: -26px;margin-left: 34px;">{{ firstname }}
+         <span class="caret"></span></button>
+        <ul class="dropdown-menu">
+        <li><a href="#">Help</a></li>
+        <li><a href="#">Settings</a></li>
+        <li><a href="{% url 'index' %}">Logout</a></li>
+       </ul>
+      </div>
     </div>
       </div>
       </div>
@@ -105,7 +114,7 @@ $(function () {
                         <td>
                         
                           <a href="{% url 'deletebookmark'  b.bookmark %}">
-                            <span class="glyphicon glyphicon-trash"></span>
+                            <span class="glyphicon glyphicon-trash" data-toggle = "tooltip" title = "delete bookmark" data-placement = "bottom"></span>
                           </a>
                           </td>
                         </tr>
@@ -127,7 +136,21 @@ $(function () {
                               <form name = "form2" id = "form2" method = "post" action = "{% url 'savetag' %}" class = "form-inline">
                                   {% csrf_token %}
                                   <div class = "form-group">
-                                    <input name = "tag"  id = "tag" required>
+                                    <input name = "tag" id = "tag" required>
+                                    <!-- <ul class="tagit ui-widget ui-widget-content ui-corner-all">
+                                    <li class="tagit-choice ui-widget-content ui-state-default ui-corner-all tagit-choice-editable"><span class="tagit-label">Data Science</span>
+                                    <a class="tagit-close">
+                                    <span class="text-icon">×</span>
+                                    <span class="ui-icon ui-icon-close"></span>
+                                    </a>
+                                    </li>
+                                   <!--  <li class="tagit-new">
+                                    <input class="ui-widget-content ui-autocomplete-input" autocomplete="off" type="text"><span role="status" aria-live="polite" class="ui-helper-hidden-accessible">1 result is available, use up and down arrow keys to navigate.</span>
+                                    </li> -->
+                                    <!-- <div>
+                                      
+                                    </div>
+                                    </ul> -->
                                         <input type="hidden" id = "field1" name="bookmark" value="">
                                         <button type = "submit" class = "btn btn-danger">Save</button>
                                   </div>
